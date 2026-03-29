@@ -19,7 +19,7 @@ body {
         linear-gradient(rgba(235, 235, 235, 0.2), rgba(235, 235, 235, 0.3)),
         
         /* GANTI: 'background.jpg' dengan nama file gambar Anda yang sebenarnya */
-        url('Harmoni.png'); 
+        url('../image/Harmoni.png'); 
 
     /* 2. MENGATUR POSISI DAN UKURAN GAMBAR */
     background-size: cover; /* Membuat gambar otomatis penuh layar tanpa terpotong */

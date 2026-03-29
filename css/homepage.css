@@ -97,7 +97,7 @@ body {
         /* Overlay gelap agar teks putih bisa terbaca jelas */
         linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
         /* GANTI NAMA FILE INI DENGAN GAMBAR PANTAI/PEMANDANGAN ANDA NANTI */
-        url('home-rak.png'); 
+        url('../image/home-rak.png'); 
         
     background-size: cover;
     background-position: center;
