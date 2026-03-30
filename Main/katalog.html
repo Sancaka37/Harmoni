@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harmoni - Katalog Produk</title>
+    <link rel="stylesheet" href="../CSS/katalog.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-logo">
+            <img src="../Image/Logo no BG 1.png" alt="Logo Harmoni" class="logo-img">
+            <h2>HARMONI</h2> 
+        </div>
+        <div class="nav-search">
+            <input type="text" placeholder="Cari kesukaanmu...">
+        </div>
+        <div class="nav-actions">
+            <button class="btn-cart">Keranjang (3)</button>
+            <div class="profile-avatar">
+                <img src="../Image/profile.png" alt="profil">
+            </div> 
+        </div>
+    </nav>
+
+    <div class="catalog-container">
+        
+        <aside class="sidebar">
+            <div class="filter-group">
+                <h3>KATEGORI</h3>
+                <label class="filter-item">
+                    <input type="checkbox" checked> <span class="active-text">Makanan</span>
+                </label>
+                <label class="filter-item">
+                    <input type="checkbox"> <span>Minuman</span>
+                </label>
+                <label class="filter-item">
+                    <input type="checkbox"> <span>Aksesoris</span>
+                </label>
+            </div>
+
+            <div class="filter-group">
+                <h3>RENTANG HARGA</h3>
+                <div class="price-range">
+                    <span>Rp 0</span>
+                    <span>Rp 100.000</span>
+                </div>
+                <hr class="divider-line">
+            </div>
+
+            <div class="filter-group">
+                <h3>CUSTOMER RATING</h3>
+                <p class="rating-filter">⭐⭐⭐⭐⭐ & Up</p>
+            </div>
+
+            <div class="filter-group">
+                <h3>POPULARITAS</h3>
+                <div class="tags-container">
+                    <span class="tag active-tag">Terlaris</span>
+                    <span class="tag">Terbaru</span>
+                    <span class="tag">Terbatas</span>
+                </div>
+            </div>
+        </aside>
+
+        <main class="product-area">
+            <div class="product-header">
+                <p>Sort by: <strong>Featured</strong> <span>&or;</span></p>
+            </div>
+
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="card-img-wrapper">
+                        <img src="../Image/Harmoni.png" alt="Prol Tape">
+                        <span class="badge badge-yellow">BEST SELLER</span>
+                    </div>
+                    <h4>Prol Tape</h4>
+                    <p class="reviews">⭐⭐⭐⭐⭐ (128 reviews)</p>
+                    <p class="price">Rp 25.000</p>
+                </div>
+
+                <div class="product-card">
+                    <div class="card-img-wrapper">
+                        <img src="../Image/Harmoni.png" alt="Pia Tape">
+                    </div>
+                    <h4>Pia Tape</h4>
+                    <p class="reviews">⭐⭐⭐⭐⭐ (56 reviews)</p>
+                    <p class="price">Rp 27.000</p>
+                </div>
+
+                <div class="product-card">
+                    <div class="card-img-wrapper">
+                        <img src="../Image/Harmoni.png" alt="Edamame">
+                        <span class="badge badge-green">ORGANIC</span>
+                    </div>
+                    <h4>Edamame</h4>
+                    <p class="reviews">⭐⭐⭐⭐⭐ (210 reviews)</p>
+                    <p class="price">Rp 45.000</p>
+                </div>
+                
+                </div>
+
+            <div class="pagination">
+                <button class="page-btn">&lt;</button>
+                <button class="page-btn active-page">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <span class="page-dots">...</span>
+                <button class="page-btn">8</button>
+                <button class="page-btn">&gt;</button>
+            </div>
+        </main>
+
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-bottom">
+            <p>© 2024 HARMONI. All rights reserved. Designed for excellence.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

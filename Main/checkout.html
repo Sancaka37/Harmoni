@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harmoni - Checkout</title>
+    <link rel="stylesheet" href="../CSS/checkout.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-logo">
+            <img src="../Image/Logo no BG 1.png" alt="Logo Harmoni" class="logo-img">
+            <h2>HARMONI</h2> 
+        </div>
+        <div class="nav-links">
+            <a href="katalog.html">Shop</a>
+            <a href="#">Categories</a>
+            <a href="#">Help</a>
+            <a href="keranjang.html" class="cart-badge">🛒 2</a>
+        </div>
+    </nav>
+
+    <div class="checkout-container">
+        
+        <div class="checkout-left">
+            
+            <div class="breadcrumbs">
+                <a href="keranjang.html">Keranjang</a> &rsaquo; <span>Checkout</span>
+            </div>
+
+            <div class="page-title">
+                <h1>Checkout</h1>
+                <p>Isi penerima dan alamat</p>
+            </div>
+
+            <section class="checkout-section">
+                <div class="section-header">
+                    <span class="step-number">1</span>
+                    <h2>Informasi Penerima</h2>
+                </div>
+                <div class="form-group">
+                    <label>Penerima</label>
+                    <input type="text" placeholder="Farel">
+                </div>
+                <div class="form-group">
+                    <label>Alamat Lengkap</label>
+                    <input type="text" placeholder="Jl. Soekarno No. 123">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Kota</label>
+                        <input type="text" placeholder="Surabaya">
+                    </div>
+                    <div class="form-group">
+                        <label>Kode Pos</label>
+                        <input type="text" placeholder="60115">
+                    </div>
+                </div>
+            </section>
+
+            <section class="checkout-section">
+                <div class="section-header">
+                    <span class="step-number">2</span>
+                    <h2>Metode Pengiriman</h2>
+                </div>
+                
+                <div class="shipping-options">
+                    <label class="radio-card active-card">
+                        <div class="radio-left">
+                            <input type="radio" name="shipping" checked>
+                            <div>
+                                <h4>Standard Delivery</h4>
+                                <p>4-7 Hari</p>
+                            </div>
+                        </div>
+                        <span class="price-bold">Rp10.000,00</span>
+                    </label>
+
+                    <label class="radio-card">
+                        <div class="radio-left">
+                            <input type="radio" name="shipping">
+                            <div>
+                                <h4>Express</h4>
+                                <p>1-2 business days</p>
+                            </div>
+                        </div>
+                        <span class="price-bold">Rp20.000,00</span>
+                    </label>
+                </div>
+            </section>
+
+            <section class="checkout-section">
+                <div class="section-header">
+                    <span class="step-number">3</span>
+                    <h2>Pembayaran</h2>
+                </div>
+
+                <div class="payment-tabs">
+                    <button class="tab-btn active-tab">💳 Virtual Account</button>
+                    <button class="tab-btn">QRIS</button>
+                </div>
+
+                <div class="payment-box">
+                    <h4>Virtual Account</h4>
+                    <p class="subtitle">Pilih jalur bank yang diinginkan</p>
+                    
+                    <div class="bank-list">
+                        <label class="bank-item">
+                            <div class="bank-info">
+                                <div class="bank-logo bg-blue">BCA</div>
+                                <span>Bank Central Asia</span>
+                            </div>
+                            <input type="radio" name="bank">
+                        </label>
+                        <label class="bank-item">
+                            <div class="bank-info">
+                                <div class="bank-logo bg-blue-dark">BRI</div>
+                                <span>Bank Rakyat Indonesia</span>
+                            </div>
+                            <input type="radio" name="bank">
+                        </label>
+                        <label class="bank-item">
+                            <div class="bank-info">
+                                <div class="bank-logo bg-yellow">MDR</div>
+                                <span>Bank Mandiri</span>
+                            </div>
+                            <input type="radio" name="bank">
+                        </label>
+                        <label class="bank-item">
+                            <div class="bank-info">
+                                <div class="bank-logo bg-orange">BNI</div>
+                                <span>Bank Negara Indonesia</span>
+                            </div>
+                            <input type="radio" name="bank">
+                        </label>
+                    </div>
+                </div>
+            </section>
+
+            <button class="btn-pesan">PESAN</button>
+            <p class="terms-text">By clicking complete purchase, you agree to our Terms & Conditions.</p>
+
+        </div>
+
+        <div class="checkout-right">
+            <div class="order-card">
+                <h3>Orderan</h3>
+                
+                <div class="order-items">
+                    <div class="order-item">
+                        <img src="../Image/Harmoni.png" alt="Marning" class="item-img">
+                        <div class="item-details">
+                            <h4>Marning Jagung</h4>
+                            <p>Qty: 1</p>
+                            <strong>Rp18.000,00</strong>
+                        </div>
+                    </div>
+                    <div class="order-item">
+                        <img src="../Image/Harmoni.png" alt="Kue Kacang" class="item-img">
+                        <div class="item-details">
+                            <h4>Kue Kacang</h4>
+                            <p>Qty: 1</p>
+                            <strong>Rp15.000,00</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order-calculations">
+                    <div class="calc-row">
+                        <span>Subtotal</span>
+                        <span>Rp33.000,00</span>
+                    </div>
+                    <div class="calc-row">
+                        <span>Pengiriman</span>
+                        <span>Rp10.000,00</span>
+                    </div>
+                    <div class="calc-row">
+                        <span>Pajak</span>
+                        <span>10%</span>
+                    </div>
+                    <div class="calc-row total-row">
+                        <span>Total</span>
+                        <span class="total-price">Rp 46.300,00</span>
+                    </div>
+                </div>
+
+                <div class="promo-box">
+                    <input type="text" placeholder="Promo code">
+                    <button>Apply</button>
+                </div>
+
+                <div class="secure-badge">
+                    <span>🔒 SECURE CHECKOUT</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="checkout-footer">
+        <div class="footer-left">
+            <p>🎁 SouvenirCo © 2024</p>
+        </div>
+        <div class="footer-right">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Refund Policy</a>
+        </div>
+    </footer>
+
+</body>
+</html>

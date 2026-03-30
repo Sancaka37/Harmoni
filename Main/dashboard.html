@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harmoni Admin - Dashboard Penjualan</title>
+    <link rel="stylesheet" href="../CSS/dashboard.css">
+</head>
+<body>
+
+    <div class="admin-layout">
+        
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="../Image/Logo no BG 1.png" alt="Logo Harmoni" class="logo-img">
+                <h2>HARMONI</h2>
+            </div>
+            
+            <ul class="sidebar-menu">
+                <li><a href="#" class="menu-item active">Dashboard</a></li>
+                <li><a href="admin_produk.html" class="menu-item">Manajemen Produk</a></li>
+                <li><a href="#" class="menu-item">Manajemen Pesanan</a></li>
+                <li><a href="#" class="menu-item">Laporan Keuangan</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            
+            <header class="topbar">
+                <h1 class="page-title">Dashboard Penjualan</h1>
+                <div class="topbar-right">
+                    <div class="search-bar">
+                        <input type="text" placeholder="Search...">
+                    </div>
+                    <div class="notif-bell">
+                        <div class="notif-dot"></div>
+                        Bell
+                    </div>
+                    <div class="admin-profile">
+                        <img src="../Image/profile.png" alt="Admin Profile">
+                        <span>Admin Harmoni</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-body">
+                
+                <div class="summary-grid">
+                    <div class="summary-card">
+                        <p class="card-title">Total Pelanggan</p>
+                        <h3>1.248</h3>
+                        <span class="trend positive">+12% dari bulan lalu</span>
+                    </div>
+                    <div class="summary-card">
+                        <p class="card-title">Produk Terjual (Item)</p>
+                        <h3>5.736</h3>
+                        <span class="trend positive">+8% dari bulan lalu</span>
+                    </div>
+                    <div class="summary-card">
+                        <p class="card-title">Total Transaksi</p>
+                        <h3>890</h3>
+                        <span class="trend negative">-3% dari bulan lalu</span>
+                    </div>
+                    <div class="summary-card">
+                        <p class="card-title">Pendapatan</p>
+                        <h3>Rp 45.200.000</h3>
+                        <span class="trend positive">+15% dari bulan lalu</span>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3>Statistik Bulanan</h3>
+                        <select class="date-filter">
+                            <option>6 Bulan Terakhir</option>
+                            <option>Tahun Ini</option>
+                        </select>
+                    </div>
+                    
+                    <div class="chart-area">
+                        <div class="chart-y-axis">
+                            <span>300</span>
+                            <span>200</span>
+                            <span>100</span>
+                            <span>0</span>
+                        </div>
+                        <div class="chart-grid-lines">
+                            <div class="line"></div>
+                            <div class="line"></div>
+                            <div class="line"></div>
+                            <div class="line bottom-line"></div>
+                            
+                            <svg class="dummy-line" viewBox="0 0 500 150" preserveAspectRatio="none">
+                                <polyline points="0,120 100,110 200,60 300,50 400,10 500,80" fill="none" stroke="#facc15" stroke-width="3"/>
+                                <polyline points="0,80 100,100 200,90 300,90 400,40 500,30" fill="none" stroke="#3b82f6" stroke-width="3"/>
+                            </svg>
+
+                            <div class="chart-x-axis">
+                                <span>Jan</span>
+                                <span>Feb</span>
+                                <span>Mar</span>
+                                <span>Apr</span>
+                                <span>Mei</span>
+                                <span>Jun</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3>Daftar Pesanan Terkini</h3>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th width="5%"><input type="checkbox"></th>
+                                <th width="35%">Nama Produk</th>
+                                <th width="20%">Lokasi Pengiriman</th>
+                                <th width="25%">Tanggal Transaksi</th>
+                                <th width="15%">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td><strong>Prol Tape (10 Box)</strong></td>
+                                <td class="text-gray">Surabaya, Jawa Timur</td>
+                                <td class="text-gray">09 / Juni / 2026</td>
+                                <td><span class="badge badge-green">Selesai</span></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td><strong>Kue Kacang (5 Toples) ; Wedang Cor (2 Pack)</strong></td>
+                                <td class="text-gray">Malang, Jawa Timur</td>
+                                <td class="text-gray">09 / Juni / 2026</td>
+                                <td><span class="badge badge-gray">Diantar</span></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td><strong>Edamame Organik (20 kg)</strong></td>
+                                <td class="text-gray">Sidoarjo, Jawa Timur</td>
+                                <td class="text-gray">06 / Juni / 2026</td>
+                                <td><span class="badge badge-green">Selesai</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="table-footer">
+                        <span class="showing-text">Menampilkan 1 sampai 10 dari 97 hasil</span>
+                        <div class="pagination">
+                            <button class="page-nav">Previous</button>
+                            <button class="page-num active-num">1</button>
+                            <button class="page-num">2</button>
+                            <button class="page-num">3</button>
+                            <span class="page-dots">...</span>
+                            <button class="page-num">10</button>
+                            <button class="page-nav">Next</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>
