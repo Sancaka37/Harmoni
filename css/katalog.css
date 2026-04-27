@@ -45,7 +45,17 @@ body { background-color: #fafafa; color: #333; }
     cursor: pointer;
 }
 /* Aksen kuning untuk teks Makanan yang aktif */
-.active-text { color: #ca8a04; }
+/* Transisi halus untuk perubahan warna teks */
+.category-text {
+    color: #4b5563;
+    transition: color 0.2s ease;
+}
+
+/* Warna saat checkbox dicentang */
+.active-category { 
+    color: #ca8a04; 
+    font-weight: 700;
+}
 
 .price-range { display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; }
 .divider-line { border: 0; border-top: 2px solid #e5e7eb; margin-top: 8px; }

@@ -27,7 +27,7 @@ body {
     background-repeat: no-repeat; /* Mencegah gambar berulang-ulang (ubin) */
     background-attachment: fixed; /* Membuat gambar tetap diam saat layar di-scroll */
     
-    /* -- JANGAN DIUBAH (Kode tata letak kita yang lama) -- */
+    /* -- JANGAN DIUBAH  -- */
     display: flex;
     justify-content: center;
     align-items: center;
