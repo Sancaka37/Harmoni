@@ -160,6 +160,66 @@ body {
     margin-bottom: 30px; 
 }
 
+/* =========================================
+        PENGATURAN COUNTER PESANAN 
+   ========================================= */
+.purchase-actions {
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.satuan-info {
+    font-size: 13px;
+    font-weight: 600;
+    color: #4b5563; /* Abu-abu gelap */
+}
+
+#satuanAngka {
+    color: #111827;
+    font-weight: 800;
+    font-size: 15px;
+}
+
+.counter-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid #d1d5db;
+    border-radius: 8px; /* Ujung melengkung */
+    width: max-content; /* Lebar menyesuaikan isi */
+    overflow: hidden; /* Mencegah tombol keluar batas */
+    background-color: #ffffff;
+}
+
+.btn-counter {
+    background-color: #f9fafb;
+    border: none;
+    padding: 8px 16px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #111827;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-counter:hover {
+    background-color: #e5e7eb; /* Efek gelap saat disentuh/di-hover */
+}
+
+.counter-input {
+    width: 50px;
+    text-align: center;
+    border: none;
+    border-left: 1px solid #d1d5db; /* Garis pemisah kiri */
+    border-right: 1px solid #d1d5db; /* Garis pemisah kanan */
+    font-size: 16px;
+    font-weight: 700;
+    color: #111827;
+    outline: none;
+    background-color: transparent;
+}
+
 /* Tombol Interaksi */
 .action-buttons {
     display: flex;

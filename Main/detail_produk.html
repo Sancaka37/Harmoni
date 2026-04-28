@@ -46,14 +46,24 @@
 
         <div class="product-info">
             <p class="rating-header">⭐ 4.9 (124 REVIEWS)</p>
-            <h1>Kue Kacang Original</h1>
+            <h1>Kue Kacang Premium</h1>
             <p class="price">Rp 36.000</p>
             
             <p class="description">
                 Kue Kacang Original adalah camilan khas Jember yang terbuat dari campuran kacang tanah, gula, dan tepung. Dengan tekstur yang renyah di luar dan lembut di dalam, kue ini menawarkan rasa manis yang pas dengan aroma kacang yang menggoda. Cocok untuk dinikmati sebagai teman minum teh atau kopi, serta sebagai oleh-oleh khas Jember yang selalu dicari.
             </p>
             
-            <p class="unit">Satuan: 1 Toples</p>
+            <div class="purchase-actions">
+                <!-- Teks Satuan Dinamis -->
+                <p class="satuan-info">Satuan: <span id="satuanAngka">0</span></p>
+
+                <!-- Tombol Counter Pesanan -->
+                <div class="counter-container">
+                    <button type="button" class="btn-counter" onclick="ubahJumlah('kurang')">&minus;</button>
+                    <input type="text" id="inputJumlah" class="counter-input" value="0" readonly>
+                    <button type="button" class="btn-counter" onclick="ubahJumlah('tambah')">&plus;</button>
+                </div>
+            </div>
 
             <div class="action-buttons">
                 <button class="btn-primary-dark" onclick="window.location.href='keranjang.html'">Masukkan Keranjang</button>
@@ -113,7 +123,7 @@
 
     p.replaceWith(input);
     input.focus(); // Langsung fokus agar pengguna bisa mengetik
-}
+    }
         function changeImage(clickedThumb, newImageSrc) {
             // 1. Ubah sumber gambar utama sesuai gambar yang diklik
             document.getElementById('mainImage').src = newImageSrc;
@@ -132,8 +142,35 @@
 
     favoriteBtn.addEventListener('click', function() {
         this.classList.toggle('isActive');
-});
+    });
+
+    // FUNGSI COUNTER PESANAN
+        function ubahJumlah(aksi) {
+            // Ambil elemen dari HTML berdasarkan ID
+            const inputElement = document.getElementById('inputJumlah');
+            const satuanElement = document.getElementById('satuanAngka');
+            
+            // Ubah teks yang ada di input menjadi angka sesungguhnya (integer)
+            let jumlahSaatIni = parseInt(inputElement.value);
+
+            // Logika penambahan dan pengurangan
+            if (aksi === 'tambah') {
+                jumlahSaatIni += 1;
+            } else if (aksi === 'kurang') {
+                // Cegah angka menjadi negatif 
+                if (jumlahSaatIni > 0) {
+                    jumlahSaatIni -= 1;
+                } else {
+                    alert('Tidak bisa kurang dari 0 item.');
+                }
+            }
+
+            // Kembalikan angka yang sudah dihitung ke HTML (input dan teks satuan)
+            inputElement.value = jumlahSaatIni;
+            satuanElement.innerText = jumlahSaatIni;
+        }
 
     </script>
 </body>
+
 </html>
