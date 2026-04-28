@@ -178,7 +178,7 @@ body {
     cursor: pointer;
 }
 .btn-primary-dark:hover {
-    background-color: #0a0d11ba; /* Warna gelap saat hover */
+    background-color: #0a0d11ba; /* Warna berubah saat hover */
 }
 
 .btn-favorite {
@@ -190,6 +190,14 @@ body {
     font-size: 13px;
     font-weight: 600;
     cursor: pointer;
+}
+.btn-favorite:hover {
+    background-color: #e5e7eb;
+    color: #111827;
+}
+.btn-favorite.isActive{
+    background-color: #040910;
+    color: #fafafa;
 }
 
 /* Kotak Pesan Kuning */

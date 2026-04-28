@@ -62,7 +62,7 @@
 
             <div class="message-box">
                 <p>PESAN</p>
-                <span>"Untuk acara, Hampers, dan lainnya"</span>
+                <span id='editableText' onclick="transformToInput()">"Untuk acara, Hampers, dan lainnya"</span>
                 <span class="arrow-icon">→</span>
             </div>
 
@@ -92,7 +92,28 @@
             <p>© Harmoni Jember. All rights reserved. Designed for excellence.</p>
         </div>
     </footer>
+
 <script>
+    function transformToInput() {
+    const p = document.getElementById("editableText");
+    const input = document.createElement("input");
+    
+    // Salin teks dari paragraf ke nilai input
+    input.value = p.innerText;
+    input.id = "editableText"; // Menjaga ID agar tetap bisa diakses
+
+    // Saat input kehilangan fokus (klik di luar), kembalikan ke paragraf
+    input.onblur = function() {
+        const newP = document.createElement("p");
+        newP.innerText = input.value;
+        newP.id = "editableText";
+        newP.onclick = transformToInput; // Pasang kembali fungsi klik
+        input.replaceWith(newP);
+    }; 
+
+    p.replaceWith(input);
+    input.focus(); // Langsung fokus agar pengguna bisa mengetik
+}
         function changeImage(clickedThumb, newImageSrc) {
             // 1. Ubah sumber gambar utama sesuai gambar yang diklik
             document.getElementById('mainImage').src = newImageSrc;
@@ -106,6 +127,13 @@
             // 3. Tambahkan garis kuning HANYA ke thumbnail yang baru saja diklik
             clickedThumb.classList.add('active-thumb');
         }
+    
+    const favoriteBtn = document.querySelector('.btn-favorite');
+
+    favoriteBtn.addEventListener('click', function() {
+        this.classList.toggle('isActive');
+});
+
     </script>
 </body>
 </html>
