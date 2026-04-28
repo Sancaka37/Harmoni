@@ -27,21 +27,21 @@
     <div class="catalog-container">
         
         <aside class="sidebar">
-            <div class="filter-group">
+           <div class="filter-group">
                 <h3>KATEGORI</h3>
                 <label class="filter-item">
-                    <input type="checkbox" onclick="toggleCategoryColor(this, 'text-crunchy')" checked> 
+                    <input type="checkbox" value="crunchy" onclick="toggleCategoryColor(this, 'text-crunchy'); applyFilters()" checked> 
                     <span id="text-crunchy" class="category-text active-category">Crunchy</span>
                 </label>
                 <label class="filter-item">
-                    <input type="checkbox" onclick="toggleCategoryColor(this, 'text-chewy')"> 
+                    <input type="checkbox" value="chewy" onclick="toggleCategoryColor(this, 'text-chewy'); applyFilters()"> 
                     <span id="text-chewy" class="category-text">Chewy</span>
                 </label>
                 <label class="filter-item">
-                    <input type="checkbox" onclick="toggleCategoryColor(this, 'text-original')"> 
+                    <input type="checkbox" value="original" onclick="toggleCategoryColor(this, 'text-original'); applyFilters()"> 
                     <span id="text-original" class="category-text">Original</span>
                 </label>
-            </div>  
+            </div>
 
             <div class="filter-group">
                 <h3>RENTANG HARGA</h3>
@@ -57,14 +57,14 @@
                 <p class="rating-filter">⭐⭐⭐⭐⭐ & Up</p>
             </div>
 
-            <div class="filter-group">
+           <div class="filter-group">
                 <h3>POPULARITAS</h3>
                 <div class="tags-container">
-                    <span class="tag active-tag" onclick="selectTag(this)">Terlaris</span>
-                    <span class="tag" onclick="selectTag(this)">Terbaru</span>
-                    <span class="tag" onclick="selectTag(this)">Terbatas</span>
+                    <span class="tag active-tag" onclick="selectTag(this, 'terlaris')">Terlaris</span>
+                    <span class="tag" onclick="selectTag(this, 'terbaru')">Terbaru</span>
+                    <span class="tag" onclick="selectTag(this, 'terbatas')">Terbatas</span>
                 </div>
-            </div> 
+            </div>
             <!-- popularitas kuning  -->
         </aside>
 
@@ -73,11 +73,11 @@
                 <p>Sort by: <strong>Featured</strong> <span>&or;</span></p>
             </div> 
 
-            <div class="product-grid">
-                <div class="product-card" style="cursor: pointer;" onclick="window.location.href='detail_produk.html'">
+           <div class="product-grid" id="productGrid">
+                
+                <div class="product-card" data-category="crunchy" data-sales="765" data-date="2024-05-10" style="cursor: pointer;" onclick="window.location.href='detail_produk.html'">
                     <div class="card-img-wrapper">
-                             <!---Gambar Katalog Tape-->
-                        <img src="../Image/Kue Kacang Original.jpg" alt="Prol Tape">
+                        <img src="../Image/Kue Kacang Original.jpg" alt="Kue Kacang">
                         <span class="badge badge-yellow">BEST SELLER</span>
                     </div>
                     <h4>Kue Kacang</h4>
@@ -85,7 +85,7 @@
                     <p class="price">Rp 25.000</p>
                 </div>
 
-                <div class="product-card">
+                <div class="product-card" data-category="crunchy" data-sales="310" data-date="2024-06-01">
                     <div class="card-img-wrapper">
                         <img src="../Image/Pia Krispy.jpg" alt="Pia Krispy"> 
                     </div>
@@ -94,7 +94,7 @@
                     <p class="price">Rp 27.000</p>
                 </div>
 
-                <div class="product-card">
+                <div class="product-card" data-category="crunchy" data-sales="504" data-date="2024-05-15">
                     <div class="card-img-wrapper">
                         <img src="../Image/Edamame.jpg" alt="Edamame">
                         <span class="badge badge-green">ORGANIC</span>
@@ -104,16 +104,16 @@
                     <p class="price">Rp 45.000</p>
                 </div>
 
-                <div class="product-card">
+                <div class="product-card" data-category="crunchy" data-sales="180" data-date="2024-06-05">
                     <div class="card-img-wrapper">
                         <img src="../image/Kripik Ubi Madu Harmoni.jpg" alt="Kripik">
                     </div>
-                    <h4>Kripik </h4>
+                    <h4>Kripik</h4>
                     <p class="reviews">⭐⭐⭐⭐ (89 reviews)</p>
                     <p class="price">Rp 45.000</p>
                 </div>
 
-                <div class="product-card">
+                <div class="product-card" data-category="chewy" data-sales="600" data-date="2024-04-20">
                     <div class="card-img-wrapper">
                         <img src="../image/Suwar-suwir multirasa Harmoni.jpg" alt="Suwar-suwir">
                     </div>
@@ -122,7 +122,7 @@
                     <p class="price">Rp 78.000</p>
                 </div>
 
-                <div class="product-card">
+                <div class="product-card" data-category="original" data-sales="400" data-date="2024-06-10">
                     <div class="card-img-wrapper">
                         <img src="../image/Soes Ori .jpeg" alt="Soes">
                     </div>
@@ -131,8 +131,8 @@
                     <p class="price">Rp 67.000</p>
                 </div>
                 
-                </div> 
-                <!-- tempat produk atau tambah produk -->
+            </div>
+                      <!-- tempat produk atau tambah produk -->
 
             <div class="pagination">
                 <button class="page-btn">&lt;</button>
@@ -153,31 +153,74 @@
         </div>
     </footer>
 <script>
-        // Fungsi untuk Kategori (Checkbox)
+        // Default sorting saat pertama kali halaman dibuka
+        let currentSort = 'terlaris';
+
+        // 1. FUNGSI PEWARNAAN KATEGORI (Hanya UI)
         function toggleCategoryColor(checkboxElement, spanId) {
             const textElement = document.getElementById(spanId);
             if (checkboxElement.checked) {
-                // Jika dicentang, tambahkan class warna
                 textElement.classList.add('active-category');
             } else {
-                // Jika tidak dicentang, hapus class warna
                 textElement.classList.remove('active-category');
             }
         }
 
-        // Fungsi untuk Popularitas (Tag)
-        function selectTag(clickedElement) {
-            // 1. Cari semua tag yang ada
+        // 2. FUNGSI PEWARNAAN POPULARITAS & TRIGGER SORTING
+        function selectTag(clickedElement, sortType) {
             const allTags = document.querySelectorAll('.tag');
+            allTags.forEach(tag => tag.classList.remove('active-tag'));
+            clickedElement.classList.add('active-tag');
             
-            // 2. Hapus warna kuning dari semua tag
-            allTags.forEach(tag => {
-                tag.classList.remove('active-tag');
+            // Simpan jenis sorting yang dipilih lalu jalankan filter
+            currentSort = sortType;
+            applyFilters();
+        }
+
+        // 3. FUNGSI UTAMA (Menyaring & Mengurutkan Data)
+        function applyFilters() {
+            const grid = document.getElementById('productGrid');
+            const cards = Array.from(grid.getElementsByClassName('product-card'));
+            
+            // Cek kategori apa saja yang sedang dicentang
+            const checkedCategories = Array.from(document.querySelectorAll('.filter-item input[type="checkbox"]:checked')).map(cb => cb.value);
+
+            let visibleCards = [];
+
+            // A. LOGIKA MENYARING (FILTERING)
+            cards.forEach(card => {
+                const category = card.getAttribute('data-category');
+                
+                // PERBAIKAN: Jika array kosong (tidak ada centang) ATAU kategori cocok, tampilkan!
+                if (checkedCategories.length === 0 || checkedCategories.includes(category)) {
+                    card.style.display = 'block';
+                    visibleCards.push(card);
+                } else {
+                    card.style.display = 'none';
+                }
             });
 
-            // 3. Tambahkan warna kuning HANYA pada tag yang baru saja diklik
-            clickedElement.classList.add('active-tag');
+            // B. LOGIKA MENGURUTKAN (SORTING)
+            if (currentSort === 'terlaris') {
+                // Urutkan berdasarkan angka data-sales dari tinggi ke rendah
+                visibleCards.sort((a, b) => parseInt(b.getAttribute('data-sales')) - parseInt(a.getAttribute('data-sales')));
+            } else if (currentSort === 'terbaru') {
+                // Urutkan berdasarkan tanggal data-date (Terbaru ke terlama)
+                visibleCards.sort((a, b) => b.getAttribute('data-date').localeCompare(a.getAttribute('data-date')));
+            } else if (currentSort === 'terbatas') {
+                // Simulasi terbatas: Urutkan data-sales dari terendah ke tertinggi (paling jarang dibeli)
+                visibleCards.sort((a, b) => parseInt(a.getAttribute('data-sales')) - parseInt(b.getAttribute('data-sales')));
+            }
+
+            // C. RENDER ULANG KE LAYAR
+            // Masukkan kembali kartu yang sudah diurutkan ke dalam grid HTML
+            visibleCards.forEach(card => grid.appendChild(card));
         }
+
+        // Jalankan fungsi ini satu kali saat halaman pertama kali dimuat
+        window.onload = () => {
+            applyFilters();
+        };
     </script>
 </body>
 </html>

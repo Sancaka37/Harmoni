@@ -235,7 +235,7 @@ body {
     background-color: #fcfcf5; /* Kotak dasar warna putih */
     border-radius: 16px;
     overflow: hidden; /* Memastikan sudut gambar ikut melengkung dan tidak keluar batas */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Bayangan sangat halus agar terkesan timbul */
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05); /* Bayangan sangat halus agar terkesan timbul */
     text-align: left;
     cursor: pointer;
     transition: transform 0.1s ease-out ; /* Animasi pelan saat kartu terangkat */
@@ -280,14 +280,14 @@ body {
     font-weight: 800;
     color: #111827;
     margin-bottom: 8px;
-    transition: color 0.4s ease; /* Animasi perubahan warna teks */
+    transition: color 0.1s ease-out; /* Animasi perubahan warna teks */
 }
 
 .card-content p {
     font-size: 14px;
     color: #6b7280;
     line-height: 1.5;
-    transition: color 0.4s ease; /* Animasi perubahan warna teks */
+    transition: color 0.1s ease-out; /* Animasi perubahan warna teks */
 }
 
 /* =========================================
@@ -301,8 +301,9 @@ body {
 /* 2. Teks yang tadinya gelap/abu-abu berubah jadi putih agar kontras dan terbaca */
 .category-card:hover .card-content h3,
 .category-card:hover .card-content p {
-    color: #ffffff; 
+    color: #fcfcf5; 
 }   
+
 
 
 /* =========================================
