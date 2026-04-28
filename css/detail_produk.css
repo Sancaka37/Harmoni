@@ -1,16 +1,82 @@
 /* 1. RESET & NAVBAR (Diambil dari homepage.css/katalog.css) */
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-body { background-color: #fafafa; color: #333; }
+* { margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
 
-.navbar { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background-color: #ffffff; border-bottom: 1px solid #e5e7eb; }
-.nav-logo { display: flex; align-items: center; gap: 10px; }
-.logo-img { height: 35px; width: auto; }
-.nav-logo h2 { font-size: 20px; font-weight: 800; color: #111827; margin: 0; }
-.nav-search input { width: 350px; padding: 12px 20px; border: none; border-radius: 25px; background-color: #f3f4f6; font-size: 13px; outline: none; }
-.nav-actions { display: flex; align-items: center; gap: 15px; }
-.btn-cart { padding: 10px 15px; border: none; background-color: transparent; font-weight: 700; font-size: 13px; cursor: pointer; }
-.profile-avatar { width: 35px; height: 35px; border-radius: 50%; overflow: hidden; background-color: #0c58cb; }
-.profile-avatar img { width: 100%; height: 100%; object-fit: cover; }
+body { 
+    background-color: #fafafa; 
+    color: #333; 
+}
+
+
+.navbar { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 15px 50px; 
+    background-color: #ffffff; 
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.nav-logo { 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+}
+
+.logo-img { 
+    height: 35px; 
+    width: auto; 
+}
+
+.nav-logo h2 { 
+    font-size: 20px; 
+    font-weight: 800; 
+    color: #111827; 
+    margin: 0; 
+}
+.nav-search input { 
+    width: 350px; 
+    padding: 12px 20px; 
+    border: none; 
+    border-radius: 25px; 
+    background-color: #f3f4f6; 
+    font-size: 13px; 
+    outline: none; 
+}
+
+.nav-actions { 
+    display: flex; 
+    align-items: center; 
+    gap: 15px; 
+}
+.btn-cart { 
+    padding: 10px 15px; 
+    border: none; 
+    background-color: transparent; 
+    font-weight: 700; 
+    font-size: 13px; 
+    cursor: pointer; 
+}
+.btn-cart:hover{
+    color:#333;
+    text-decoration: underline ;
+    text-decoration-thickness:1px;
+}
+
+.profile-avatar { 
+    width: 35px; 
+    height: 35px; 
+    border-radius: 50%; 
+    overflow: hidden; 
+    background-color: #0c58cb; 
+}
+.profile-avatar img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+}
 
 /* 2. LAYOUT DETAIL PRODUK */
 .product-detail-container {
@@ -37,7 +103,8 @@ body { background-color: #fafafa; color: #333; }
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
+    transition: opacity 0.3s ease; /* Tambahkan baris ini */
+}   
 .thumbnail-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -86,7 +153,12 @@ body { background-color: #fafafa; color: #333; }
     line-height: 1.6;
     margin-bottom: 24px;
 }
-.unit { font-size: 13px; font-weight: 600; color: #4b5563; margin-bottom: 30px; }
+.unit { 
+    font-size: 13px; 
+    font-weight: 600; 
+    color: #4b5563; 
+    margin-bottom: 30px; 
+}
 
 /* Tombol Interaksi */
 .action-buttons {
@@ -94,9 +166,9 @@ body { background-color: #fafafa; color: #333; }
     gap: 15px;
     margin-bottom: 24px;
 }
-.btn-primary-dark {
+.btn-primary-dark { /*tombol masuk keranjang*/
     flex: 1;
-    background-color: #111827; /* Warna gelap gelap gelap */
+    background-color: #111827; /* Warna gelap */
     color: #ffffff;
     padding: 14px;
     border: none;
@@ -105,6 +177,10 @@ body { background-color: #fafafa; color: #333; }
     font-weight: 700;
     cursor: pointer;
 }
+.btn-primary-dark:hover {
+    background-color: #0a0d11ba; /* Warna gelap saat hover */
+}
+
 .btn-favorite {
     background-color: #f3f4f6;
     color: #4b5563;
@@ -127,9 +203,20 @@ body { background-color: #fafafa; color: #333; }
     border-radius: 12px;
     margin-bottom: 30px;
 }
-.message-box p { font-size: 11px; font-weight: 800; }
-.message-box span { font-size: 13px; font-weight: 600; }
-.arrow-icon { font-size: 16px; font-weight: 900; }
+
+.message-box p { 
+    font-size: 11px; 
+    font-weight: 800; 
+}
+
+.message-box span { 
+    font-size: 13px; 
+    font-weight: 600; 
+}
+.arrow-icon { 
+    font-size: 16px; 
+    font-weight: 900; 
+}
 
 /* Testimoni Produk */
 .testimonial-group h3 { font-size: 16px; font-weight: 800; color: #111827; margin-bottom: 20px; }
@@ -144,10 +231,27 @@ body { background-color: #fafafa; color: #333; }
     border-radius: 50%;
     object-fit: cover;
 }
-.user-testi h4 { font-size: 13px; font-weight: 700; color: #111827; margin-bottom: 2px; }
-.user-testi p { font-size: 13px; color: #6b7280; line-height: 1.5; }
+.user-testi h4 { 
+    font-size: 13px; 
+    font-weight: 700; 
+    color: #111827; 
+    margin-bottom: 2px; 
+}
+.user-testi p { 
+    font-size: 13px; 
+    color: #6b7280; 
+    line-height: 1.5; 
+}
 
 
 /* 5. FOOTER (Sama persis) */
-.site-footer { padding: 30px 50px; background-color: #fafafa; border-top: 1px solid #e5e7eb; }
-.footer-bottom { text-align: center; font-size: 11px; color: #9ca3af; }
+.site-footer { 
+    padding: 30px 50px; 
+    background-color: #fafafa; 
+    border-top: 1px solid #e5e7eb; 
+}
+.footer-bottom { 
+    text-align: center; 
+    font-size: 11px; 
+    color: #9ca3af; 
+}

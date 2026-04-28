@@ -28,33 +28,32 @@
         
         <div class="product-gallery">
             <div class="main-image-wrapper">
-                <img src="../Image/Harmoni.png" alt="Prol Tape Utama">
+                <img id="mainImage" src="../Image/Kue Kacang Original.jpg" alt="Produk Utama">
             </div>
-            <div class="thumbnail-grid">
-                <div class="thumb-wrapper active-thumb">
-                    <img src="../Image/Harmoni.png" alt="Prol Tape 1">
+
+            <div class="thumbnail-grid" id="thumbnailContainer">
+                <div class="thumb-wrapper active-thumb" onclick="changeImage(this, '../Image/Kue Kacang Original.jpg')">
+                    <img src="../Image/Sub 1.png" alt="Detail 1">
                 </div>
-                <div class="thumb-wrapper">
-                    <img src="../Image/foto toko harm...png" alt="Toko Harmoni">
+                <div class="thumb-wrapper" onclick="changeImage(this, '../Image/Sub 2.png')">
+                    <img src="../Image/Sub 2.png" alt="Detail 2">
                 </div>
-                <div class="thumb-wrapper">
-                    <img src="../Image/Harmoni.png" alt="Prol Tape 3">
+                <div class="thumb-wrapper" onclick="changeImage(this, '../Image/Sub 3.png')">
+                    <img src="../Image/Sub 3.png" alt="Detail 3">
                 </div>
             </div>
         </div>
 
         <div class="product-info">
             <p class="rating-header">⭐ 4.9 (124 REVIEWS)</p>
-            <h1>Prol Tape</h1>
-            <p class="price">Rp 25.000</p>
+            <h1>Kue Kacang Original</h1>
+            <p class="price">Rp 36.000</p>
             
             <p class="description">
-                Kue berbahan dasar tape singkong yang dipanggang hingga menghasilkan tekstur lembut, 
-                moist, dan padat. Rasa manis berpadu dengan sedikit asam khas fermentasi, dilengkapi aroma 
-                yang khas dan menggugah selera.
+                Kue Kacang Original adalah camilan khas Jember yang terbuat dari campuran kacang tanah, gula, dan tepung. Dengan tekstur yang renyah di luar dan lembut di dalam, kue ini menawarkan rasa manis yang pas dengan aroma kacang yang menggoda. Cocok untuk dinikmati sebagai teman minum teh atau kopi, serta sebagai oleh-oleh khas Jember yang selalu dicari.
             </p>
             
-            <p class="unit">Satuan: 1 box</p>
+            <p class="unit">Satuan: 1 Toples</p>
 
             <div class="action-buttons">
                 <button class="btn-primary-dark" onclick="window.location.href='keranjang.html'">Masukkan Keranjang</button>
@@ -63,7 +62,7 @@
 
             <div class="message-box">
                 <p>PESAN</p>
-                <span>Untuk acara, Hampers, dll</span>
+                <span>"Untuk acara, Hampers, dan lainnya"</span>
                 <span class="arrow-icon">→</span>
             </div>
 
@@ -93,6 +92,20 @@
             <p>© Harmoni Jember. All rights reserved. Designed for excellence.</p>
         </div>
     </footer>
+<script>
+        function changeImage(clickedThumb, newImageSrc) {
+            // 1. Ubah sumber gambar utama sesuai gambar yang diklik
+            document.getElementById('mainImage').src = newImageSrc;
 
+            // 2. Hapus garis kuning (active-thumb) dari semua thumbnail
+            const allThumbs = document.querySelectorAll('.thumb-wrapper');
+            allThumbs.forEach(thumb => {
+                thumb.classList.remove('active-thumb');
+            });
+
+            // 3. Tambahkan garis kuning HANYA ke thumbnail yang baru saja diklik
+            clickedThumb.classList.add('active-thumb');
+        }
+    </script>
 </body>
 </html>
