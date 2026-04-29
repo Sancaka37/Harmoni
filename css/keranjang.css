@@ -111,16 +111,10 @@ body {
 .item-actions {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-end; 
     align-items: flex-end;
 }
-.btn-delete {
-    background: none;
-    border: none;
-    color: #9ca3af;
-    cursor: pointer;
-    font-size: 14px;
-}
+
 
 /* Tombol + dan - */
 .qty-control {

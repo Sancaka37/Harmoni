@@ -55,7 +55,7 @@
             
             <div class="purchase-actions">
                 <!-- Teks Satuan Dinamis -->
-                <p class="satuan-info">Satuan: <span id="satuanAngka">0</span></p>
+                <p class="satuan-info">Satuan: <span id="satuanAngka">0</span> Toples</p>
 
                 <!-- Tombol Counter Pesanan -->
                 <div class="counter-container">
@@ -143,31 +143,39 @@
     favoriteBtn.addEventListener('click', function() {
         this.classList.toggle('isActive');
     });
+       // Saat halaman pertama kali dibuka, cek apakah ada data pesanan di memori browser
+        window.onload = function() {
+            let memoriJumlah = localStorage.getItem('jumlahPesananKueKacang');
+            if (memoriJumlah) {
+                // Jika ada, langsung ubah angka di layar sesuai memori
+                document.getElementById('inputJumlah').value = memoriJumlah;
+                document.getElementById('satuanAngka').innerText = memoriJumlah;
+            }
+        };
 
-    // FUNGSI COUNTER PESANAN
+        // FUNGSI COUNTER PESANAN
         function ubahJumlah(aksi) {
-            // Ambil elemen dari HTML berdasarkan ID
             const inputElement = document.getElementById('inputJumlah');
             const satuanElement = document.getElementById('satuanAngka');
             
-            // Ubah teks yang ada di input menjadi angka sesungguhnya (integer)
             let jumlahSaatIni = parseInt(inputElement.value);
 
-            // Logika penambahan dan pengurangan
             if (aksi === 'tambah') {
                 jumlahSaatIni += 1;
             } else if (aksi === 'kurang') {
-                // Cegah angka menjadi negatif 
-                if (jumlahSaatIni > 0) {
+                if (jumlahSaatIni > 1) {
                     jumlahSaatIni -= 1;
                 } else {
-                    alert('Tidak bisa kurang dari 0 item.');
+                    alert('Minimal pembelian adalah 1 item.');
+                    return; // Hentikan fungsi agar memori tidak ikut error
                 }
             }
 
-            // Kembalikan angka yang sudah dihitung ke HTML (input dan teks satuan)
             inputElement.value = jumlahSaatIni;
             satuanElement.innerText = jumlahSaatIni;
+
+            // SIHIRNYA DI SINI: Simpan angka terbaru ke dalam 'memori browser'
+            localStorage.setItem('jumlahPesananKueKacang', jumlahSaatIni);
         }
 
     </script>

@@ -17,43 +17,28 @@
                     <img src="../Image/Logo no BG 1.png" alt="Logo Harmoni">
                     <h2>Harmoni</h2>
                 </div>
-                <button class="btn-close">✕</button>
+                <!-- Tombol X kembali ke halaman sebelumnya -->
+                <button class="btn-close" onclick="window.history.back()">✕</button>
             </div>
 
             <h1 class="cart-title">Keranjang Anda</h1>
 
             <div class="cart-items">
                 
+                <!-- Hanya 1 Produk: Kue Kacang Premium (Tong sampah dihapus) -->
                 <div class="cart-item">
-                    <img src="../Image/Harmoni.png" alt="Marning Jagung" class="item-img">
+                    <img src="../Image/Kue Kacang Original.jpg" alt="Kue Kacang" class="item-img">
                     <div class="item-info">
-                        <h3>Marning Jagung</h3>
-                        <p class="variant">Kategori rasa, hook</p>
-                        <p class="price">Rp18.000,00</p>
+                        <h3>Kue Kacang Premium</h3>
+                        <p class="variant">Satuan: 1 Toples</p>
+                        <p class="price">Rp 36.000,00</p>
                     </div>
                     <div class="item-actions">
-                        <button class="btn-delete">🗑️</button>
                         <div class="qty-control">
-                            <button>-</button>
-                            <span>1</span>
-                            <button>+</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="cart-item">
-                    <img src="../Image/Harmoni.png" alt="Kue Kacang" class="item-img">
-                    <div class="item-info">
-                        <h3>Kue Kacang</h3>
-                        <p class="variant">Kategori rasa, hook</p>
-                        <p class="price">Rp15.000,00</p>
-                    </div>
-                    <div class="item-actions">
-                        <button class="btn-delete">🗑️</button>
-                        <div class="qty-control">
-                            <button>-</button>
-                            <span>1</span>
-                            <button>+</button>
+                            <!-- Tombol minus dan plus memanggil fungsi JS -->
+                            <button onclick="ubahKeranjang('kurang')">-</button>
+                            <span id="qty-angka">1</span>
+                            <button onclick="ubahKeranjang('tambah')">+</button>
                         </div>
                     </div>
                 </div>
@@ -63,7 +48,8 @@
             <div class="cart-summary">
                 <div class="summary-row">
                     <span class="label">SUBTOTAL</span>
-                    <span class="value">Rp33.000,00</span>
+                    <!-- Diberi ID agar angkanya bisa diubah lewat JS -->
+                    <span class="value" id="subtotal-text">Rp 36.000,00</span>
                 </div>
                 <div class="summary-row">
                     <span class="label">ESTIMATED SHIPPING</span>
@@ -71,11 +57,11 @@
                 </div>
                 <div class="summary-row total-row">
                     <span class="label-total">Total</span>
-                    <span class="value-total">Rp33.000,00</span>
+                    <span class="value-total" id="total-text">Rp 36.000,00</span>
                 </div>
             </div>
 
-                <button class="btn-checkout" onclick="window.location.href='checkout.html'">CHECK OUT &rarr;</button>            
+            <button class="btn-checkout" onclick="window.location.href='checkout.html'">CHECK OUT &rarr;</button>            
             <div class="continue-shopping">
                 <a href="katalog.html">&larr; Continue Shopping</a>
             </div>
@@ -83,5 +69,55 @@
         </div>
     </div>
 
+    <!-- SCRIPT OTOMATISASI HARGA -->
+    <script>
+        let kuantitas = 1; // Angka default
+        const hargaSatuan = 36000;
+
+        // 1. Saat keranjang dibuka, intip memori browser
+        window.onload = function() {
+            let memoriJumlah = localStorage.getItem('jumlahPesananKueKacang');
+            if (memoriJumlah) {
+                kuantitas = parseInt(memoriJumlah); // Gunakan angka dari memori
+            }
+            
+            // Langsung jalankan fungsi untuk memperbarui tampilan teks & total harga
+            perbaruiTampilanKeranjang();
+        };
+
+        // 2. Fungsi saat tombol + dan - diklik di keranjang
+        function ubahKeranjang(aksi) {
+            if (aksi === 'tambah') {
+                kuantitas += 1;
+            } else if (aksi === 'kurang') {
+                if (kuantitas > 1) {
+                    kuantitas -= 1;
+                } else {
+                    alert('Minimal pesanan adalah 1 item.');
+                    return;
+                }
+            }
+
+            // Simpan kembali angka terbaru ke memori browser, supaya halaman detail juga tahu!
+            localStorage.setItem('jumlahPesananKueKacang', kuantitas);
+            
+            perbaruiTampilanKeranjang();
+        }
+
+        // 3. Fungsi khusus untuk mengubah teks di layar
+        function perbaruiTampilanKeranjang() {
+            // Tampilkan angka kuantitas
+            document.getElementById('qty-angka').innerText = kuantitas;
+
+            // Hitung dan format harga
+            let totalHarga = kuantitas * hargaSatuan;
+            let formatRupiah = new Intl.NumberFormat('id-ID').format(totalHarga);
+            let textRupiah = "Rp " + formatRupiah + ",00";
+
+            // Perbarui subtotal dan total
+            document.getElementById('subtotal-text').innerText = textRupiah;
+            document.getElementById('total-text').innerText = textRupiah;
+        }
+    </script>
 </body>
 </html>
