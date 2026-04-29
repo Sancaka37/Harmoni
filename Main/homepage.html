@@ -19,7 +19,7 @@
         </div>
 
         <div class="nav-actions">
-           <button class="btn-cart" onclick="window.location.href='keranjang.html'">Keranjang (3)</button>
+          <button class="btn-cart" onclick="window.location.href='keranjang.html'">Keranjang (<span class="cart-counter-badge">1</span>)</button>
             <div class="profile-avatar">
                 <img src="../image/profile.png " alt="profil default" class="profil">
             </div> 
@@ -184,6 +184,21 @@
             <p>© 2024 HARMONI. All rights reserved. Designed for excellence.</p>
         </div>
     </footer>
+
+    <!-- SCRIPT SINKRONISASI ANGKA KERANJANG NAVBAR -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Cek apakah ada data pesanan di memori browser, jika tidak ada tampilkan angka 1
+            let memoriJumlah = localStorage.getItem('jumlahPesananKueKacang');
+            let kuantitas = memoriJumlah ? parseInt(memoriJumlah) : 1; 
+
+            // Cari tulisan angka di dalam navbar dan perbarui
+            let badgeKeranjang = document.querySelector('.cart-counter-badge');
+            if (badgeKeranjang) {
+                badgeKeranjang.innerText = kuantitas;
+            }
+        });
+    </script>
 
     </body>
 </html>

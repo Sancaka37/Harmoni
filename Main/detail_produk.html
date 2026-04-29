@@ -17,7 +17,7 @@
             <input type="text" placeholder="Cari kesukaanmu...">
         </div>
         <div class="nav-actions">
-            <button class="btn-cart" onclick="window.location.href='keranjang.html'">Keranjang (3)</button>
+            <button class="btn-cart" onclick="window.location.href='keranjang.html'">Keranjang (<span class="cart-counter-badge">1</span>)</button>
             <div class="profile-avatar">
                 <img src="../Image/profile.png" alt="profil">
             </div> 
@@ -104,80 +104,89 @@
     </footer>
 
 <script>
+    // 1. FUNGSI EDIT TEKS PESAN (Hampers)
     function transformToInput() {
-    const p = document.getElementById("editableText");
-    const input = document.createElement("input");
-    
-    // Salin teks dari paragraf ke nilai input
-    input.value = p.innerText;
-    input.id = "editableText"; // Menjaga ID agar tetap bisa diakses
+        const p = document.getElementById("editableText");
+        const input = document.createElement("input");
+        
+        input.value = p.innerText;
+        input.id = "editableText";
 
-    // Saat input kehilangan fokus (klik di luar), kembalikan ke paragraf
-    input.onblur = function() {
-        const newP = document.createElement("p");
-        newP.innerText = input.value;
-        newP.id = "editableText";
-        newP.onclick = transformToInput; // Pasang kembali fungsi klik
-        input.replaceWith(newP);
-    }; 
+        input.onblur = function() {
+            const newP = document.createElement("p");
+            newP.innerText = input.value;
+            newP.id = "editableText";
+            newP.onclick = transformToInput;
+            input.replaceWith(newP);
+        }; 
 
-    p.replaceWith(input);
-    input.focus(); // Langsung fokus agar pengguna bisa mengetik
+        p.replaceWith(input);
+        input.focus();
     }
-        function changeImage(clickedThumb, newImageSrc) {
-            // 1. Ubah sumber gambar utama sesuai gambar yang diklik
-            document.getElementById('mainImage').src = newImageSrc;
 
-            // 2. Hapus garis kuning (active-thumb) dari semua thumbnail
-            const allThumbs = document.querySelectorAll('.thumb-wrapper');
-            allThumbs.forEach(thumb => {
-                thumb.classList.remove('active-thumb');
-            });
-
-            // 3. Tambahkan garis kuning HANYA ke thumbnail yang baru saja diklik
-            clickedThumb.classList.add('active-thumb');
-        }
+    // 2. FUNGSI GALERI GAMBAR
+    function changeImage(clickedThumb, newImageSrc) {
+        document.getElementById('mainImage').src = newImageSrc;
+        const allThumbs = document.querySelectorAll('.thumb-wrapper');
+        allThumbs.forEach(thumb => {
+            thumb.classList.remove('active-thumb');
+        });
+        clickedThumb.classList.add('active-thumb');
+    }
     
+    // 3. FUNGSI TOMBOL FAVORITE
     const favoriteBtn = document.querySelector('.btn-favorite');
-
     favoriteBtn.addEventListener('click', function() {
         this.classList.toggle('isActive');
     });
-       // Saat halaman pertama kali dibuka, cek apakah ada data pesanan di memori browser
-        window.onload = function() {
-            let memoriJumlah = localStorage.getItem('jumlahPesananKueKacang');
-            if (memoriJumlah) {
-                // Jika ada, langsung ubah angka di layar sesuai memori
-                document.getElementById('inputJumlah').value = memoriJumlah;
-                document.getElementById('satuanAngka').innerText = memoriJumlah;
+
+    // ==========================================
+    // 4. LOGIKA SINKRONISASI & COUNTER PESANAN
+    // ==========================================
+
+    // A. Saat halaman pertama kali dibuka
+    window.onload = function() {
+        let memoriJumlah = localStorage.getItem('jumlahPesananKueKacang');
+        
+        // Jika ada data di memori, tampilkan. Jika kosong, default ke angka 1.
+        let kuantitasAwal = memoriJumlah ? parseInt(memoriJumlah) : 1;
+        
+        document.getElementById('inputJumlah').value = kuantitasAwal;
+        document.getElementById('satuanAngka').innerText = kuantitasAwal;
+        document.querySelector('.cart-counter-badge').innerText = kuantitasAwal;
+    };
+
+    // B. Saat tombol Plus / Minus diklik
+    function ubahJumlah(aksi) {
+        const inputElement = document.getElementById('inputJumlah');
+        const satuanElement = document.getElementById('satuanAngka');
+        
+        // Ambil angka saat ini
+        let jumlahSaatIni = parseInt(inputElement.value);
+
+        // Hitung tambah / kurang
+        if (aksi === 'tambah') {
+            jumlahSaatIni += 1;
+        } else if (aksi === 'kurang') {
+            if (jumlahSaatIni > 1) {
+                jumlahSaatIni -= 1;
+            } else {
+                alert('Minimal pembelian adalah 1 item.');
+                return; // Berhenti agar angka 0 tidak tersimpan
             }
-        };
-
-        // FUNGSI COUNTER PESANAN
-        function ubahJumlah(aksi) {
-            const inputElement = document.getElementById('inputJumlah');
-            const satuanElement = document.getElementById('satuanAngka');
-            
-            let jumlahSaatIni = parseInt(inputElement.value);
-
-            if (aksi === 'tambah') {
-                jumlahSaatIni += 1;
-            } else if (aksi === 'kurang') {
-                if (jumlahSaatIni > 1) {
-                    jumlahSaatIni -= 1;
-                } else {
-                    alert('Minimal pembelian adalah 1 item.');
-                    return; // Hentikan fungsi agar memori tidak ikut error
-                }
-            }
-
-            inputElement.value = jumlahSaatIni;
-            satuanElement.innerText = jumlahSaatIni;
-
-            // SIHIRNYA DI SINI: Simpan angka terbaru ke dalam 'memori browser'
-            localStorage.setItem('jumlahPesananKueKacang', jumlahSaatIni);
         }
 
+        // 1. Update angka di tombol counter dan teks "Satuan"
+        inputElement.value = jumlahSaatIni;
+        satuanElement.innerText = jumlahSaatIni;
+
+        // 2. Simpan ke memori browser (agar keranjang & checkout tahu)
+        localStorage.setItem('jumlahPesananKueKacang', jumlahSaatIni);
+        
+        // 3. Update angka Keranjang di Navbar atas secara instan
+        document.querySelector('.cart-counter-badge').innerText = jumlahSaatIni;
+    }
+</script>
     </script>
 </body>
 

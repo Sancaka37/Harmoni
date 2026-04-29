@@ -9,7 +9,7 @@
 <body>
 
     <nav class="navbar">
-        <div class="nav-logo">
+        <div class="nav-logo" style="cursor: pointer;" onclick="window.location.href='homepage.html'">
             <img src="../Image/Logo no BG 1.png" alt="Logo Harmoni" class="logo-img">
             <h2>HARMONI</h2> 
         </div>
@@ -17,7 +17,8 @@
             <a href="katalog.html">Shop</a>
             <a href="#">Categories</a>
             <a href="#">Help</a>
-            <a href="keranjang.html" class="cart-badge">🛒 2</a>
+            <!-- Badge Keranjang Terintegrasi JS -->
+            <a href="keranjang.html" class="cart-badge">🛒 <span id="cart-badge-count">1</span></a>
         </div>
     </nav>
 
@@ -66,9 +67,10 @@
                 </div>
                 
                 <div class="shipping-options">
-                    <label class="radio-card active-card">
+                    <!-- Default tidak ada yang aktif (active-card dihapus), ditambah fungsi klik -->
+                    <label class="radio-card" id="ship-standard" onclick="pilihPengiriman('standard', 10000)">
                         <div class="radio-left">
-                            <input type="radio" name="shipping" checked>
+                            <input type="radio" name="shipping" id="radio-standard">
                             <div>
                                 <h4>Standard Delivery</h4>
                                 <p>4-7 Hari</p>
@@ -77,9 +79,9 @@
                         <span class="price-bold">Rp10.000,00</span>
                     </label>
 
-                    <label class="radio-card">
+                    <label class="radio-card" id="ship-express" onclick="pilihPengiriman('express', 20000)">
                         <div class="radio-left">
-                            <input type="radio" name="shipping">
+                            <input type="radio" name="shipping" id="radio-express">
                             <div>
                                 <h4>Express</h4>
                                 <p>1-2 business days</p>
@@ -97,11 +99,13 @@
                 </div>
 
                 <div class="payment-tabs">
-                    <button class="tab-btn active-tab">💳 Virtual Account</button>
-                    <button class="tab-btn">QRIS</button>
+                    <!-- Fungsi klik untuk berganti tab -->
+                    <button class="tab-btn active-tab" id="tab-va" onclick="pilihPembayaran('va')">💳 Virtual Account</button>
+                    <button class="tab-btn" id="tab-qris" onclick="pilihPembayaran('qris')">QRIS</button>
                 </div>
 
-                <div class="payment-box">
+                <!-- BOX VIRTUAL ACCOUNT -->
+                <div class="payment-box" id="box-va">
                     <h4>Virtual Account</h4>
                     <p class="subtitle">Pilih jalur bank yang diinginkan</p>
                     
@@ -136,6 +140,14 @@
                         </label>
                     </div>
                 </div>
+
+                <!-- BOX QRIS (Disembunyikan secara default) -->
+                <div class="payment-box qris-box" id="box-qris" style="display: none;">
+                    <h4>Pembayaran QRIS</h4>
+                    <p class="subtitle">Scan QR Code di bawah menggunakan E-Wallet atau M-Banking Anda</p>
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=Pembayaran+Harmoni+Berhasil" alt="QRIS Dummy">
+                    <p style="font-size: 12px; color: #6b7280; margin-top: 10px;">Otomatis terverifikasi dalam 10 menit</p>
+                </div>
             </section>
 
             <button class="btn-pesan" onclick="window.location.href='invoice.html'">PESAN</button>
@@ -148,20 +160,19 @@
                 <h3>Orderan</h3>
                 
                 <div class="order-items">
-                    <div class="order-item">
-                        <img src="../Image/Harmoni.png" alt="Marning" class="item-img">
+                    <!-- Hanya Kue Kacang Premium yang terhubung dengan counter -->
+                    <div class="order-item" style="align-items: center;">
+                        <img src="../Image/Kue Kacang Original.jpg" alt="Kue Kacang Premium" class="item-img">
                         <div class="item-details">
-                            <h4>Marning Jagung</h4>
-                            <p>Qty: 1</p>
-                            <strong>Rp18.000,00</strong>
-                        </div>
-                    </div>
-                    <div class="order-item">
-                        <img src="../Image/Harmoni.png" alt="Kue Kacang" class="item-img">
-                        <div class="item-details">
-                            <h4>Kue Kacang</h4>
-                            <p>Qty: 1</p>
-                            <strong>Rp15.000,00</strong>
+                            <h4>Kue Kacang Premium</h4>
+                            <!-- Counter Interaktif di Checkout -->
+                            <div class="qty-control-small">
+                                <button onclick="ubahCheckout('kurang')">-</button>
+                                <span id="qty-angka">1</span>
+                                <button onclick="ubahCheckout('tambah')">+</button>
+                            </div>
+                            <br>
+                            <strong style="margin-top: 5px; display: inline-block;">Rp36.000,00</strong>
                         </div>
                     </div>
                 </div>
@@ -169,19 +180,19 @@
                 <div class="order-calculations">
                     <div class="calc-row">
                         <span>Subtotal</span>
-                        <span>Rp33.000,00</span>
+                        <span id="subtotal-text">Rp36.000,00</span>
                     </div>
                     <div class="calc-row">
                         <span>Pengiriman</span>
-                        <span>Rp10.000,00</span>
+                        <span id="shipping-text">-</span>
                     </div>
                     <div class="calc-row">
-                        <span>Pajak</span>
-                        <span>10%</span>
+                        <span>Pajak (10%)</span>
+                        <span id="tax-text">Rp3.600,00</span>
                     </div>
                     <div class="calc-row total-row">
                         <span>Total</span>
-                        <span class="total-price">Rp 46.300,00</span>
+                        <span class="total-price" id="total-text">Rp39.600,00</span>
                     </div>
                 </div>
 
@@ -190,9 +201,6 @@
                     <button>Apply</button>
                 </div>
 
-                <div class="secure-badge">
-                    <span>🔒 SECURE CHECKOUT</span>
-                </div>
             </div>
         </div>
 
@@ -209,5 +217,95 @@
         </div>
     </footer>
 
+    <!-- SCRIPT OTOMATISASI CHECKOUT -->
+    <script>
+        const hargaSatuan = 36000;
+        let kuantitas = 1;
+        let ongkosKirim = 0; // Default belum ada pengiriman yang dipilih
+
+        // 1. Inisialisasi saat Halaman Dimuat
+        window.onload = function() {
+            let memoriJumlah = localStorage.getItem('jumlahPesananKueKacang');
+            if (memoriJumlah) {
+                kuantitas = parseInt(memoriJumlah);
+            }
+            perbaruiUI();
+        };
+
+        // 2. Fungsi Tombol Plus/Minus di Resi Orderan
+        function ubahCheckout(aksi) {
+            if (aksi === 'tambah') {
+                kuantitas += 1;
+            } else if (aksi === 'kurang') {
+                if (kuantitas > 1) {
+                    kuantitas -= 1;
+                } else {
+                    alert('Minimal pesanan adalah 1 item.');
+                    return;
+                }
+            }
+            // Simpan kembali ke memori browser
+            localStorage.setItem('jumlahPesananKueKacang', kuantitas);
+            perbaruiUI();
+        }
+
+        // 3. Fungsi Pemilihan Metode Pengiriman
+        function pilihPengiriman(metode, harga) {
+            document.getElementById('ship-standard').classList.remove('active-card');
+            document.getElementById('ship-express').classList.remove('active-card');
+            document.getElementById('radio-' + metode).checked = true;
+            document.getElementById('ship-' + metode).classList.add('active-card');
+
+            ongkosKirim = harga;
+            
+            // TAMBAHKAN BARIS INI UNTUK MENYIMPAN ONGKIR:
+            localStorage.setItem('biayaPengiriman', harga);
+            
+            perbaruiUI();
+        }
+
+        // 4. Fungsi Pergantian Tab Pembayaran (VA / QRIS)
+        function pilihPembayaran(metode) {
+            const tabVa = document.getElementById('tab-va');
+            const tabQris = document.getElementById('tab-qris');
+            const boxVa = document.getElementById('box-va');
+            const boxQris = document.getElementById('box-qris');
+
+            if (metode === 'qris') {
+                tabVa.classList.remove('active-tab');
+                tabQris.classList.add('active-tab');
+                boxVa.style.display = 'none';
+                boxQris.style.display = 'flex'; // qris-box diubah flex oleh CSS tambahan
+            } else {
+                tabQris.classList.remove('active-tab');
+                tabVa.classList.add('active-tab');
+                boxQris.style.display = 'none';
+                boxVa.style.display = 'block';
+            }
+        }
+
+        // 5. Fungsi Induk: Kalkulator dan Cetak Teks
+        function perbaruiUI() {
+            // Sinkronisasi Ikon Keranjang Kanan Atas
+            document.getElementById('cart-badge-count').innerText = kuantitas;
+            
+            // Sinkronisasi Angka Resi
+            document.getElementById('qty-angka').innerText = kuantitas;
+
+            // Perhitungan Harga
+            let subtotal = kuantitas * hargaSatuan;
+            let pajak = subtotal * 0.10; // 10% Pajak
+            let totalAkhir = subtotal + ongkosKirim + pajak;
+
+            // Pemformatan Rupiah
+            const formatRp = (angka) => "Rp" + new Intl.NumberFormat('id-ID').format(angka) + ",00";
+
+            // Pasang teks harga ke komponen HTML
+            document.getElementById('subtotal-text').innerText = formatRp(subtotal);
+            document.getElementById('shipping-text').innerText = ongkosKirim === 0 ? '-' : formatRp(ongkosKirim);
+            document.getElementById('tax-text').innerText = formatRp(pajak);
+            document.getElementById('total-text').innerText = formatRp(totalAkhir);
+        }
+    </script>
 </body>
 </html>
