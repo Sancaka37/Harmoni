@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harmoni - Profil Pengguna</title>
+    <link rel="stylesheet" href="../CSS/profil.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-logo" style="cursor: pointer;" onclick="window.location.href='homepage.html'">
+            <img src="../Image/Logo no BG 1.png" alt="Logo Harmoni" class="logo-img">
+            <h2>HARMONI</h2> 
+        </div>
+        <div class="nav-search">
+            <input type="text" placeholder="Cari kesukaanmu...">
+        </div>
+        <div class="nav-actions">
+            <button class="btn-cart" onclick="window.location.href='keranjang.html'">Keranjang (<span class="cart-counter-badge">1</span>)</button>
+            <div class="profile-avatar">
+                <!-- ID ditambahkan agar foto di navbar ikut berubah -->
+                <img id="navbar-avatar" src="../Image/profile.png" alt="profil">
+            </div> 
+        </div>
+    </nav>
+
+    <!-- KONTEN UTAMA -->
+    <div class="profile-container">
+        
+        <!-- SIDEBAR KIRI -->
+        <aside class="sidebar-profile">
+            <!-- Info Singkat User -->
+            <div class="user-brief">
+                <div class="brief-avatar">
+                    <img id="sidebar-avatar" src="../Image/profile.png" alt="User">
+                </div>
+                <h3 id="sidebar-name">Arditya Putra</h3>
+                <p id="sidebar-email">ar*****@gmail.com</p>
+            </div>
+
+            <!-- Menu Navigasi -->
+            <nav class="profile-nav">
+                <button class="nav-btn active" onclick="switchTab('profile', this)">
+                    <span class="icon">👤</span> Profile
+                </button>
+                <button class="nav-btn" onclick="switchTab('history', this)">
+                    <span class="icon">📦</span> Order History
+                </button>
+                <button class="nav-btn">
+                    <span class="icon">❤️</span> Wishlist
+                </button>
+                <button class="nav-btn">
+                    <span class="icon">⚙️</span> Settings
+                </button>
+            </nav>
+
+            <!-- Kotak Bantuan -->
+            <div class="help-box">
+                <h4>NEED HELP?</h4>
+                <p>Questions about your order? Our curators are here to help.</p>
+                <button class="btn-outline-dark">Contact Support</button>
+            </div>
+        </aside>
+
+        <!-- AREA KANAN (KONTEN DINAMIS) -->
+        <main class="main-content">
+            
+            <!-- VIEW 1: USER INFORMATION (PROFIL) -->
+            <div id="view-profile" class="view-section active-view">
+                <div class="view-header">
+                    <h1>User Information</h1>
+                    <p>Ayo Berkenalan!!! Klik pada baris untuk mengubah data Anda.</p>
+                </div>
+
+                <!-- Foto Profil Besar yang bisa di-klik -->
+                <div class="avatar-upload-container">
+                    <div class="avatar-large" onclick="document.getElementById('file-upload').click()">
+                        <img id="main-avatar" src="../Image/profile.png" alt="Avatar">
+                        <div class="edit-badge">✏️</div>
+                    </div>
+                    <!-- Input file disembunyikan, dipicu oleh klik gambar -->
+                    <input type="file" id="file-upload" accept="image/*" style="display: none;" onchange="previewAvatar(event)">
+                </div>
+
+                <!-- Daftar Informasi Pribadi (Interaktif & Tersensor) -->
+                <div class="info-card">
+                    <!-- Format: Nama -->
+                    <div class="info-row" onclick="editField(this, 'name')">
+                        <span class="info-label">Nama</span>
+                        <span class="info-value" data-raw="Arditya Putra Sembodo">Arditya Putra Sembodo</span>
+                    </div>
+                    <!-- Format: Bio -->
+                    <div class="info-row" onclick="editField(this, 'bio')">
+                        <span class="info-label">Bio</span>
+                        <span class="info-value text-muted" data-raw="">Ditulis disini</span>
+                    </div>
+                    <!-- Format: Gender -->
+                    <div class="info-row" onclick="editField(this, 'gender')">
+                        <span class="info-label">Jenis Kelamin</span>
+                        <span class="info-value" data-raw="Laki-laki">Laki-laki</span>
+                    </div>
+                    <!-- Format: HP (Tersensor) -->
+                    <div class="info-row" onclick="editField(this, 'phone')">
+                        <span class="info-label">No Handphone</span>
+                        <span class="info-value" data-raw="081234567882">********82</span>
+                    </div>
+                    <!-- Format: Email (Tersensor) -->
+                    <div class="info-row" onclick="editField(this, 'email')">
+                        <span class="info-label">Email</span>
+                        <span class="info-value" data-raw="arditya13@gmail.com">ar*******13@gmail.com</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW 2: ORDER HISTORY (Disembunyikan default) -->
+            <div id="view-history" class="view-section">
+                <div class="view-header">
+                    <h1>Order History</h1>
+                    <p>Semua Pesanan Kamu Akan keliatan Di Sini</p>
+                </div>
+
+                <!-- Tab Mini Histori -->
+                <div class="history-tabs">
+                    <div class="left-tabs">
+                        <span class="htab active">All Orders</span>
+                        <span class="htab">Past 3 Months</span>
+                    </div>
+                    <span class="history-note">Showing 3 most recent orders</span>
+                </div>
+
+                <!-- Tabel Order -->
+                <div class="order-table">
+                    <div class="table-head">
+                        <span>ORDER ID</span>
+                        <span>DATE</span>
+                        <span>STATUS</span>
+                        <span>TOTAL</span>
+                        <span>ACTION</span>
+                    </div>
+
+                    <!-- Order 1 (Invoice Sebelumnya, Disembunyikan Default) -->
+                    <div class="table-row" id="pesanan-baru" style="display: none;">
+                        <div class="col-id">
+                            <strong>#SC-88291</strong>
+                            <span class="shipping-type">Express Shipping</span>
+                        </div>
+                        <div class="col-date">Mei 01, 2024</div>
+                        <div class="col-status"><span class="badge-status badge-processing">Processing</span></div>
+                        <div class="col-total"><strong>Rp 39.600</strong></div>
+                        <div class="col-action"><a href="invoice.html">View Details</a></div>
+                    </div>
+
+                    <!-- Order 2 -->
+                    <div class="table-row">
+                        <div class="col-id">
+                            <strong>#SC-77102</strong>
+                            <span class="shipping-type">Standard Shipping</span>
+                        </div>
+                        <div class="col-date">Apr 12, 2024</div>
+                        <div class="col-status"><span class="badge-status badge-delivered">Delivered</span></div>
+                        <div class="col-total"><strong>Rp 120.000</strong></div>
+                        <div class="col-action"><a href="#">View Details</a></div>
+                    </div>
+
+                    <!-- Order 3 -->
+                    <div class="table-row">
+                        <div class="col-id">
+                            <strong>#SC-66304</strong>
+                            <span class="shipping-type">Standard Shipping</span>
+                        </div>
+                        <div class="col-date">Mar 05, 2024</div>
+                        <div class="col-status"><span class="badge-status badge-delivered">Delivered</span></div>
+                        <div class="col-total"><strong>Rp 45.000</strong></div>
+                        <div class="col-action"><a href="#">View Details</a></div>
+                    </div>
+                </div>
+
+                <!-- Kotak Bawah -->
+                <div class="continue-shopping-box">
+                    <div class="cart-icon-large">🛒</div>
+                    <h3>Bingung Mau Cari Oleh-Oleh Apa?</h3>
+                    <p>Tenang Aja!! Sekarang Udah Ada Harmoni</p>
+                    <button class="btn-yellow" onclick="window.location.href='katalog.html'">Continue Shopping</button>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="site-footer" style="padding: 30px 50px; background-color: #fafafa; border-top: 1px solid #e5e7eb; text-align: center; margin-top: 50px;">
+        <p style="font-size: 12px; color: #6b7280;">© 2024 HARMONI. All rights reserved. Designed for excellence.</p>
+    </footer>
+
+    <!-- SCRIPT JAVASCRIPT -->
+    <script>
+        // 1. SINKRONISASI KERANJANG NAVBAR
+        window.onload = function() {
+            let memoriJumlah = localStorage.getItem('jumlahPesananKueKacang');
+            if (memoriJumlah) {
+                document.querySelector('.cart-counter-badge').innerText = memoriJumlah;
+            }
+            let cekPesananBaru = localStorage.getItem('adaPesananBaru');
+            if (cekPesananBaru === 'true') {
+                // Munculkan baris tabel histori pesanannya! (Pakai 'grid' karena CSS Anda menggunakan display: grid)
+                document.getElementById('pesanan-baru').style.display = 'grid';
+            }
+        };
+
+        // 2. FUNGSI GANTI TAB (PROFIL <-> HISTORY)
+        function switchTab(tabId, btnElement) {
+            // Hapus class active dari semua tombol
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            // Tambahkan class active ke tombol yang diklik
+            btnElement.classList.add('active');
+
+            // Sembunyikan semua view
+            document.querySelectorAll('.view-section').forEach(view => {
+                view.classList.remove('active-view');
+                view.style.display = 'none';
+            });
+
+            // Tampilkan view yang dituju
+            const targetView = document.getElementById('view-' + tabId);
+            targetView.classList.add('active-view');
+            targetView.style.display = 'block';
+        }
+
+        // 3. FUNGSI GANTI FOTO PROFIL (LOCAL PREVIEW)
+        function previewAvatar(event) {
+            const input = event.target;
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    // Ganti src gambar di ke-3 tempat sekaligus
+                    document.getElementById('main-avatar').src = e.target.result;
+                    document.getElementById('sidebar-avatar').src = e.target.result;
+                    document.getElementById('navbar-avatar').src = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // 4. FUNGSI SENSOR CERDAS (CENSORSHIP)
+        function censorEmail(email) {
+            let parts = email.split("@");
+            if(parts.length !== 2) return email; // Jika bukan email valid
+            let name = parts[0];
+            let domain = parts[1];
+            // Sisakan 2 huruf awal, bintang-bintangkan sisanya, tambah domain
+            if(name.length > 2) {
+                name = name.substring(0, 2) + "*".repeat(name.length - 2);
+            }
+            return name + "@" + domain;
+        }
+
+        function censorPhone(phone) {
+            // Sisakan 2 angka terakhir
+            if(phone.length > 2) {
+                return "*".repeat(phone.length - 2) + phone.substring(phone.length - 2);
+            }
+            return phone;
+        }
+
+        // 5. FUNGSI EDIT FIELD IN-LINE
+        function editField(rowElement, type) {
+            const valueSpan = rowElement.querySelector('.info-value');
+            
+            // Jika sudah berupa input (sedang diedit), jangan lakukan apa-apa
+            if (valueSpan.querySelector('input')) return;
+
+            // Ambil data asli yang tidak tersensor dari attribute data-raw
+            const rawValue = valueSpan.getAttribute('data-raw');
+
+            // Ubah span menjadi input text
+            valueSpan.innerHTML = `<input type="text" class="edit-input" value="${rawValue}">`;
+            const inputField = valueSpan.querySelector('input');
+            inputField.focus();
+
+            // Fungsi untuk menyimpan saat ditekan Enter atau klik di luar (blur)
+            const saveFunc = function(e) {
+                if (e.type === 'keypress' && e.key !== 'Enter') return;
+                
+                const newValue = inputField.value;
+                valueSpan.setAttribute('data-raw', newValue); // Simpan data asli
+                
+                // Proses sensor jika tipe phone atau email
+                let displayValue = newValue;
+                if (type === 'phone' && newValue !== '') displayValue = censorPhone(newValue);
+                if (type === 'email' && newValue !== '') displayValue = censorEmail(newValue);
+                if (newValue === '') displayValue = 'Ditulis disini';
+
+                // Kembalikan ke teks biasa
+                valueSpan.innerHTML = displayValue;
+                valueSpan.classList.remove('text-muted');
+                if (newValue === '') valueSpan.classList.add('text-muted');
+
+                // Jika Nama atau Email diubah, update juga di Sidebar Kiri
+                if (type === 'name') document.getElementById('sidebar-name').innerText = newValue || 'User Harmoni';
+                if (type === 'email') document.getElementById('sidebar-email').innerText = displayValue;
+            };
+
+            inputField.addEventListener('blur', saveFunc);
+            inputField.addEventListener('keypress', saveFunc);
+        }
+    </script>
+</body>
+</html>

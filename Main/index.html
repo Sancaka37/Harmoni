@@ -23,7 +23,7 @@
                         <label for="email">EMAIL ADDRESS</label>
                         <input type="email" id="email" placeholder="Masukkan email anda">
                     </div>
-                    
+
                     <div class="input-group">
                         <div class="password-header">
                             <label for="password">PASSWORD</label>
@@ -62,12 +62,19 @@
 
          <script>
         function handleLogin() {
-            // UBAH DI SINI: Sesuaikan nama ID dengan yang ada di HTML ('email' dan 'password')
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            // Logika Pengecekan Kredensial Admin
-            if (email === 'admin@harmoni.com' && password === 'admin123') {
+            // 1. Validasi Wajib @gmail.com
+            // Jika email tidak berakhiran @gmail.com, munculkan peringatan dan hentikan proses
+            if (!email.endsWith('@gmail.com')) {
+                alert('Login Gagal: Anda wajib menggunakan email @gmail.com!');
+                return; 
+            }
+
+            // 2. Logika Pengecekan Kredensial Admin
+            // Email admin disesuaikan menjadi @gmail.com agar lolos validasi di atas
+            if (email === 'admin@gmail.com' && password === 'admin123') {
                 
                 // Jika cocok, arahkan ke halaman Admin Produk
                 alert('Login Berhasil! Selamat datang, Admin Harmoni.');
@@ -75,11 +82,11 @@
                 
             } else {
                 
-                // Jika tidak cocok (dianggap pelanggan biasa), arahkan ke Homepage
+                // Jika validasinya lolos (@gmail.com) tapi bukan admin, arahkan ke Homepage
                 window.location.href = 'homepage.html';
                 
-                  }
-             }
+            }
+        }
          </script>
     </body>
 </html>

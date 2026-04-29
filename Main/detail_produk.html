@@ -18,9 +18,9 @@
         </div>
         <div class="nav-actions">
             <button class="btn-cart" onclick="window.location.href='keranjang.html'">Keranjang (<span class="cart-counter-badge">1</span>)</button>
-            <div class="profile-avatar">
-                <img src="../Image/profile.png" alt="profil">
-            </div> 
+            <div class="profile-avatar" style="cursor: pointer;" onclick="window.location.href='profil.html'">
+              <img src="../Image/profile.png" alt="profil">
+            </div>
         </div>
     </nav>
 
@@ -144,16 +144,31 @@
     // 4. LOGIKA SINKRONISASI & COUNTER PESANAN
     // ==========================================
 
+    // FUNGSI: Update teks tombol keranjang di Navbar
+    function perbaruiNavbarKeranjang(jumlah) {
+        let btnCart = document.querySelector('.btn-cart');
+        if (btnCart) {
+            if (jumlah > 0) {
+                btnCart.innerHTML = `Keranjang (<span class="cart-counter-badge">${jumlah}</span>)`;
+            } else {
+                // Jika 0, kembalikan ke teks default tanpa angka
+                btnCart.innerHTML = `Keranjang`;
+            }
+        }
+    }
+
     // A. Saat halaman pertama kali dibuka
     window.onload = function() {
         let memoriJumlah = localStorage.getItem('jumlahPesananKueKacang');
         
-        // Jika ada data di memori, tampilkan. Jika kosong, default ke angka 1.
-        let kuantitasAwal = memoriJumlah ? parseInt(memoriJumlah) : 1;
+        // Default ke angka 0 jika memori kosong
+        let kuantitasAwal = memoriJumlah ? parseInt(memoriJumlah) : 0;
         
         document.getElementById('inputJumlah').value = kuantitasAwal;
         document.getElementById('satuanAngka').innerText = kuantitasAwal;
-        document.querySelector('.cart-counter-badge').innerText = kuantitasAwal;
+        
+        // Update Navbar saat halaman pertama dimuat
+        perbaruiNavbarKeranjang(kuantitasAwal);
     };
 
     // B. Saat tombol Plus / Minus diklik
@@ -161,18 +176,17 @@
         const inputElement = document.getElementById('inputJumlah');
         const satuanElement = document.getElementById('satuanAngka');
         
-        // Ambil angka saat ini
         let jumlahSaatIni = parseInt(inputElement.value);
 
-        // Hitung tambah / kurang
         if (aksi === 'tambah') {
             jumlahSaatIni += 1;
         } else if (aksi === 'kurang') {
-            if (jumlahSaatIni > 1) {
+            // PERUBAHAN DI SINI: Izinkan turun sampai 0, tanpa alert!
+            if (jumlahSaatIni > 0) {
                 jumlahSaatIni -= 1;
             } else {
-                alert('Minimal pembelian adalah 1 item.');
-                return; // Berhenti agar angka 0 tidak tersimpan
+                // Jika sudah 0 dan tombol minus dipencet lagi, abaikan (jangan biarkan minus)
+                return; 
             }
         }
 
@@ -180,14 +194,12 @@
         inputElement.value = jumlahSaatIni;
         satuanElement.innerText = jumlahSaatIni;
 
-        // 2. Simpan ke memori browser (agar keranjang & checkout tahu)
+        // 2. Simpan ke memori browser
         localStorage.setItem('jumlahPesananKueKacang', jumlahSaatIni);
         
-        // 3. Update angka Keranjang di Navbar atas secara instan
-        document.querySelector('.cart-counter-badge').innerText = jumlahSaatIni;
+        // 3. Update angka Keranjang di Navbar secara instan
+        perbaruiNavbarKeranjang(jumlahSaatIni);
     }
 </script>
-    </script>
 </body>
-
 </html>

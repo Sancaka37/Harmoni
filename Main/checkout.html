@@ -150,7 +150,7 @@
                 </div>
             </section>
 
-            <button class="btn-pesan" onclick="window.location.href='invoice.html'">PESAN</button>
+           <button class="btn-pesan" onclick="prosesPesanan()">PESAN</button>
             <p class="terms-text">By clicking complete purchase, you agree to our Terms & Conditions.</p>
 
         </div>
@@ -305,6 +305,18 @@
             document.getElementById('shipping-text').innerText = ongkosKirim === 0 ? '-' : formatRp(ongkosKirim);
             document.getElementById('tax-text').innerText = formatRp(pajak);
             document.getElementById('total-text').innerText = formatRp(totalAkhir);
+        }
+
+        // FUNGSI PROSES PEMBAYARAN FINAL
+        function prosesPesanan() {
+            // 1. Simpan status bahwa ada pesanan baru ke memori untuk dibaca Halaman Profil
+            localStorage.setItem('adaPesananBaru', 'true');
+
+            // 2. Kosongkan keranjang (ubah memori menjadi 0)
+            localStorage.setItem('jumlahPesananKueKacang', 0);
+
+            // 3. Pindah ke halaman Invoice
+            window.location.href = 'invoice.html';
         }
     </script>
 </body>

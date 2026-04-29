@@ -22,7 +22,55 @@
             </div>
 
             <h1 class="cart-title">Keranjang Anda</h1>
+            <div 
+                id="empty-cart-message" 
+                style="
+                    display: none;
+                    text-align: center;
+                    padding: 60px 20px;
+                    color: #6b7280;
+                "
+            >
+                <div 
+                    style="
+                        font-size: 50px;
+                        margin-bottom: 15px;
+                        opacity: 0.5;
+                    "
+                >
+                    🛒
+                </div>
 
+                <h3 
+                    style="
+                        font-size: 18px;
+                        font-weight: 700;
+                        color: #111827;
+                        margin-bottom: 8px;
+                    "
+                >
+                    Keranjang Masih Kosong
+                </h3>
+
+                <p>
+                    Barang yang Mau Kamu Beli Akan muncul Disini
+                </p>
+
+                <button 
+                    onclick="window.location.href='katalog.html'"
+                    style="
+                        margin-top: 20px;
+                        padding: 10px 20px;
+                        background: #facc15;
+                        border: none;
+                        border-radius: 20px;
+                        font-weight: bold;
+                        cursor: pointer;
+                    "
+                >
+                    Mulai Belanja
+                </button>
+            </div>
             <div class="cart-items">
                 
                 <!-- Hanya 1 Produk: Kue Kacang Premium (Tong sampah dihapus) -->
@@ -117,7 +165,21 @@
             // Perbarui subtotal dan total
             document.getElementById('subtotal-text').innerText = textRupiah;
             document.getElementById('total-text').innerText = textRupiah;
+
+            if (kuantitas === 0) {
+            document.querySelector('.cart-items').style.display = 'none';
+            document.querySelector('.cart-summary').style.display = 'none';
+            document.querySelector('.btn-checkout').style.display = 'none';
+            document.getElementById('empty-cart-message').style.display = 'block';
+        } else {
+            document.querySelector('.cart-items').style.display = 'flex';
+            document.querySelector('.cart-summary').style.display = 'block';
+            document.querySelector('.btn-checkout').style.display = 'block';
+            document.getElementById('empty-cart-message').style.display = 'none';
         }
+        }
+      
+        
     </script>
 </body>
 </html>
