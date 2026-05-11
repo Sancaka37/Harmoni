@@ -237,17 +237,17 @@
             if (aksi === 'tambah') {
                 kuantitas += 1;
             } else if (aksi === 'kurang') {
-                if (kuantitas > 1) {
-                    kuantitas -= 1;
+                if (kuantitas > 0) {
+                    kuantitas -= 0;
                 } else {
-                    alert('Minimal pesanan adalah 1 item.');
+                    alert('Minimal pesanan adalah 0 item.');
                     return;
                 }
             }
             // Simpan kembali ke memori browser
             localStorage.setItem('jumlahPesananKueKacang', kuantitas);
             perbaruiUI();
-        }
+        }j
 
         // 3. Fungsi Pemilihan Metode Pengiriman
         function pilihPengiriman(metode, harga) {
